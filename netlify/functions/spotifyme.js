@@ -7,7 +7,7 @@ exports.handler = async function (event, context) {
   console.log("THE SECRETS", secrets);
 
     // ensure that Spotify auth is enabled for this site
-  if (!secrets.spotify?.bearerToken) {
+  if (!secrets.spotify || secrets.spotify.bearerToken) {
     return {
       statusCode: 412,
       body: JSON.stringify({
