@@ -7,7 +7,7 @@ exports.handler = async function (event, context) {
   console.log("THE SECRETS", secrets);
 
     // ensure that Spotify auth is enabled for this site
-  if (!secrets.spotify || secrets.spotify.bearerToken) {
+  if (!secrets.spotify || !secrets.spotify.bearerToken) {
     return {
       statusCode: 412,
       body: JSON.stringify({
@@ -31,7 +31,7 @@ exports.handler = async function (event, context) {
   try {
     const response = await axios.get(API_URL, options);
     console.log("SUCCESS IN REQUEST", response);
-    const data = await response.json();
+    const {data} = response;
     console.log("SUCCESS IN REQUEST", data);
     return {
       statusCode: 200,
